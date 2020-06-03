@@ -1,5 +1,5 @@
 trigger:
-  - '*'
+- '*'
   
 pool:
   vmImage: 'ubuntu-16.04'
@@ -48,7 +48,6 @@ steps:
   inputs:
     SonarCloud: 'SonarCloud connection 1'
     organization: '$(SonarOrganization)'
-    scannerMode: 'MSBuild'
     projectKey: '$(SonarProjectKey)'
     projectName: '$(SonarProjectName)'
     projectVersion: '$(Build.BuildNumber)'
@@ -91,9 +90,6 @@ steps:
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run SonarCloud code analysis'
-
-- task: SonarCloudPublish@1
-  displayName: 'Publish SonarCloud quality gate results'
   condition: |
     and
     (
@@ -111,7 +107,6 @@ steps:
       eq(variables['Build.Reason'], 'PullRequest'),
       eq(variables['System.PullRequest.TargetBranch'], 'master')
     )
-
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage report'
